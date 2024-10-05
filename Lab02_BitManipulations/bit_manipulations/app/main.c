@@ -77,6 +77,12 @@ int main(void)
 				// detect if action is already executed
 				int executed = 0;
 			
+				// detect how long t0 is pressed
+				uint8_t lastBit = buttons & 0b00000001;
+				if (lastBit == 0b00000001) {
+					cntr_T0++;
+				}
+				
 				// T0
 				uint8_t value_T0 = edges & 0b00000001;
 				if (value_T0 == 0b00000001) {
