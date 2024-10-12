@@ -65,7 +65,7 @@ readInput
 		LDR R0, =ADDR_LED_15_8
 		STRB R1, [R0]
 		
-		; read address of input value & store it in R2
+		; read address of input display value & store it in R2
 		LDR R0, =ADDR_DIP_SWITCH_7_0
 		LDRB R2, [R0]
 		; write R2 to display leds
@@ -77,13 +77,13 @@ readInput
 		LSLS R1, R1, #1
 		STRH R2, [R0, R1]
 		
-		; read address of index value & store it in R3
+		; read address of output index value & store it in R3
 		LDR R0, =ADDR_DIP_SWITCH_31_24
 		LDRB R3, [R0]
 		; mask upper four bits
 		LDR R7, =BITMASK_LOWER_NIBBLE
 		ANDS R3, R3, R7
-		; write R1 to display leds
+		; write R3 to display leds
 		LDR R0, =ADDR_LED_31_24
 		STRB R3, [R0]
 		
@@ -91,17 +91,11 @@ readInput
 		LDR R0, =my_array
 		LSLS R3, R3, #1
 		LDRH R6, [R0, R3]
-		; write table content to display output value (R4)
+		; write table content to output display value (R4)
 		LDR R0, =ADDR_LED_23_16
-		STRB R6, [R0]
+		STRH R6, [R0]
 		
-		; write do DS LEDs
-		LDR R0, =ADDR_DIP_SWITCH_31_24
-		LDRH R3, [R0] ; reset R3
-		
-		LDR R0, =ADDR_SEG7_BIN
-		STRB R6, [R0, #0] ; Write byte of output value to DS1..0.
-		STRB R3, [R0, #2] ; Write byte of output index to DS3..2.
+; END: To be programmed
 		
 ; END: To be programmed
         B       readInput
