@@ -36,9 +36,8 @@ BITMASK_LOWER_NIBBLE        EQU     0x0F
 ; ------------------------------------------------------------------
         AREA MyAsmVar, DATA, READWRITE
 ; STUDENTS: To be programmed
-
-
-
+		
+my_array			SPACE	16
 
 ; END: To be programmed
         ALIGN
@@ -55,8 +54,44 @@ readInput
         BL    waitForKey                    ; wait for key to be pressed and released
 ; STUDENTS: To be programmed
 
-
-
+		; read address of index value & store it in R1
+		LDR R0, =ADDR_DIP_SWITCH_15_8
+		LDRB R1, [R0]
+		; mask upper four bits
+		LDR R7, =BITMASK_LOWER_NIBBLE
+		ANDS R1, R1, R7
+		; write R1 to display leds
+		LDR R0, =ADDR_LED_15_8
+		STRB R1, [R0]
+		
+		; read address of input value & store it in R2
+		LDR R0, =ADDR_DIP_SWITCH_7_0
+		LDRB R2, [R0]
+		; write R2 to display leds
+		LDR R0, =ADDR_LED_7_0
+		STRB R2, [R0]
+		
+		; store R1 in array
+		LDR R0, =my_array
+		STRB R2, [R0, R1]
+		
+		; read address of index value & store it in R3
+		LDR R0, =ADDR_DIP_SWITCH_31_24
+		LDRB R3, [R0]
+		; mask upper four bits
+		LDR R7, =BITMASK_LOWER_NIBBLE
+		ANDS R3, R3, R7
+		; write R1 to display leds
+		LDR R0, =ADDR_LED_31_24
+		STRB R3, [R0]
+		
+		; load content from table
+		LDR R0, =my_array
+		LDRB R6, [R0, R3]
+		; write table content to display output value (R4)
+		LDR R0, =ADDR_LED_23_16
+		STRB R6, [R0]
+		
 
 ; END: To be programmed
         B       readInput
