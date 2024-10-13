@@ -89,19 +89,19 @@ readInput
 		
 		; load content from table
 		LDR R0, =my_array
-		LSLS R3, R3, #1
-		LDRH R6, [R0, R3]
+		LSLS R4, R3, #1
+		LDRH R6, [R0, R4]
 		; write table content to display output value (R4)
 		LDR R0, =ADDR_LED_23_16
 		STRB R6, [R0]
 		
-		; write do DS LEDs
-		LDR R0, =ADDR_DIP_SWITCH_31_24
-		LDRH R3, [R0] ; reset R3
-		
+		; write table content to segment display
+		LSLS R3, R3, #8   ; Verschiebe den Wert in R3 um 4 Bits nach links
+		ORRS R3, R3, R6   ; Führe eine ODER-Operation zwischen R3 und R4 durch
 		LDR R0, =ADDR_SEG7_BIN
-		STRB R6, [R0, #0] ; Write byte of output value to DS1..0.
-		STRB R3, [R0, #2] ; Write byte of output index to DS3..2.
+		STRH R3, [R0, #0] ; Write byte of output value to DS1..0.
+
+		
 		
 ; END: To be programmed
         B       readInput
