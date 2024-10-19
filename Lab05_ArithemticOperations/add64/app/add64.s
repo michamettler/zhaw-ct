@@ -49,8 +49,16 @@ endless
 
         ; STUDENTS: To be programmed
 
-
-
+		LDR R2, =ADDR_DIP_SWITCH_31_0
+		LDR R3, [R2]
+		
+		ADDS R0, R0, R3
+		MOVS R4, #0 
+		ADCS R1, R1, R4
+		
+		LDR R2, =ADDR_LCD_BIN
+        STR R0,[R2,#0]
+		STR R1,[R2,#4]
 
         ; END: To be programmed
         B       endless
