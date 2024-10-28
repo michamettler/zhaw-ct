@@ -115,8 +115,49 @@ display
 		LDR  R0, =ADDR_7_SEG_BIN_DS3_0
 		STRB R6, [R0, #1]  
 		STRB R5, [R0, #0]
+		
+		B disco	
+		
 		B main
 
+
+		; Create width of rotation bar
+		;R0 block of bits
+		;R2 BCD result
+disco   MOVS    R0, #0
+        MOVS    R1, #7
+		MOVS	R2, R5
+		
+barloop LSRS    R2, R2, #1
+        BCC     endbar  ; check if bit = 1, else jump and shift
+        LSLS    R0, #1
+        ADDS    R0, R0, #1     ; create block count of all 1
+		
+endbar  SUBS    R1, #1
+        BNE		barloop ; R1 = 0
+		;LDR 	R3, =ADDR_LED_31_16
+		
+		MOVS    R5, R0
+        ;MOVS    R3, #16
+        LSLS 	R0, R0, #16
+        ORRS    R0, R0, R5
+        ;MOVS    R5, #16
+		LDR     R1, =ADDR_LED_31_16
+        STRH    R0, [R1]
+		
+rotate  BL 		pause
+        MOVS    R3, #1
+        RORS    R0, R0, R3
+        LDR     R1, =ADDR_LED_31_16
+        STRH    R0, [R1]
+        SUBS    R5, #1
+        BNE		rotate ; do while block is at end
+
+; END: To be programmed
+
+        B       main
+        ENDP
+		
 ; END: To be programmed
 
         B       main
