@@ -120,10 +120,9 @@ display
 		
 		B main
 
-
-		; Create width of rotation bar
-		;R0 block of bits
-		;R2 BCD result
+; Create width of rotation bar
+;R0 block of bits
+;R2 BCD result
 disco   MOVS    R0, #0
         MOVS    R1, #7
 		MOVS	R2, R5
@@ -135,13 +134,9 @@ barloop LSRS    R2, R2, #1
 		
 endbar  SUBS    R1, #1
         BNE		barloop ; R1 = 0
-		;LDR 	R3, =ADDR_LED_31_16
-		
 		MOVS    R5, R0
-        ;MOVS    R3, #16
         LSLS 	R0, R0, #16
         ORRS    R0, R0, R5
-        ;MOVS    R5, #16
 		LDR     R1, =ADDR_LED_31_16
         STRH    R0, [R1]
 		
