@@ -31,8 +31,19 @@ NR_CASES                EQU     0xB
 
 jump_table      ; ordered table containing the labels of all cases
                 ; STUDENTS: To be programmed 
-
-
+				
+				DCD case_dark	;0x00
+				DCD case_add	;0x01
+				DCD case_sub	;0x02
+				DCD case_mult	;0x03
+				DCD case_and	;0x04
+				DCD case_or		;0x05
+				DCD case_xor	;0x06
+				DCD case_not	;0x07
+				DCD case_nand	;0x08
+				DCD case_nor	;0x09
+				DCD case_xnor	;0x0a
+				
                 ; END: To be programmed
     
 
@@ -51,24 +62,38 @@ read_dipsw      ; Read operands into R0 and R1 and display on LEDs
 				LDR R7, =ADDR_LED_15_0
 				STRB R0, [R7, #1]
 				
-				; BCD ones to R2
 				LDR R7, =ADDR_DIP_SWITCH_15_0
 				LDRB R1, [R7]
 				LDR R7, =ADDR_LED_15_0
 				STRB R1, [R7]
+				
+				;extend to 32 bit
+				UXTB 	R0,R0
+				UXTB 	R1,R1
 				
                 ; END: To be programmed
                     
 read_hexsw      ; Read operation into R2 and display on 7seg.
                 ; STUDENTS: To be programmed
 
+				LDR 	R2, =ADDR_HEX_SWITCH
+				LDRB	R2, [R2,#0]
+				LDR 	R3, =0x0F
+				ANDS	R2, R2, R3
+				LDR 	R3, =ADDR_7_SEG_BIN_DS1_0
+				STRB	R2, [R3]
 				
-
                 ; END: To be programmed
                 
 case_switch     ; Implement switch statement as shown on lecture slide
                 ; STUDENTS: To be programmed
 
+				CMP R2, #NR_CASES
+				BHS case_default
+				LSLS R2, #2
+				LDR R7, =jump_table
+				LDR R7, [R7, R2]
+				BX R7
 
                 ; END: To be programmed
 
@@ -80,14 +105,57 @@ case_switch     ; Implement switch statement as shown on lecture slide
 
 case_dark       
                 LDR  R0, =0
-                B    display_result  
+                B display_result  
 
 case_add        
                 ADDS R0, R0, R1
-                B    display_result
+                B display_result
 
 ; STUDENTS: To be programmed
 
+case_default ; bright
+				LDR	R0, =0
+				UXTB R0,R0
+				MVNS R0, R0
+				B display_result
+
+case_sub
+				SUBS R0, R0, R1
+				B display_result
+
+case_mult
+				MULS R0, R1, R0
+				B display_result
+
+case_and		
+				ANDS R0, R0, R1
+				B display_result
+
+case_or			
+				ORRS R0, R0, R1
+				B display_result
+
+case_xor		
+				EORS R0, R0, R1
+				B display_result
+
+case_not		
+				MVNS R0, R0
+				B display_result
+
+case_nand		
+				ANDS R0, R0, R1
+				MVNS R0, R0
+				B display_result
+
+case_nor		ORRS R0, R0, R1
+				MVNS R0, R0
+				B display_result
+
+case_xnor		EORS R0, R0, R1
+				MVNS R0, R0
+				B display_result
+				
 
 ; END: To be programmed
 
@@ -95,6 +163,8 @@ case_add
 display_result  ; Display result on LEDs
                 ; STUDENTS: To be programmed
 
+				LDR R7, =ADDR_LED_31_16
+				STR R0, [R7]
 
                 ; END: To be programmed
 
