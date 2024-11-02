@@ -21,7 +21,6 @@
                 AREA myCode, CODE, READONLY
                     
                 THUMB
-
 ADDR_LED_15_0           EQU     0x60000100
 ADDR_LED_31_16          EQU     0x60000102
 ADDR_7_SEG_BIN_DS1_0    EQU     0x60000114
@@ -47,12 +46,23 @@ main            PROC
 read_dipsw      ; Read operands into R0 and R1 and display on LEDs
                 ; STUDENTS: To be programmed
 
-
+				LDR R7, =ADDR_DIP_SWITCH_15_0
+				LDRB R0, [R7, #1]
+				LDR R7, =ADDR_LED_15_0
+				STRB R0, [R7, #1]
+				
+				; BCD ones to R2
+				LDR R7, =ADDR_DIP_SWITCH_15_0
+				LDRB R1, [R7]
+				LDR R7, =ADDR_LED_15_0
+				STRB R1, [R7]
+				
                 ; END: To be programmed
                     
 read_hexsw      ; Read operation into R2 and display on 7seg.
                 ; STUDENTS: To be programmed
 
+				
 
                 ; END: To be programmed
                 

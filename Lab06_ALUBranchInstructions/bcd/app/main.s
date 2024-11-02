@@ -139,13 +139,14 @@ endbar  SUBS    R1, #1
         ORRS    R0, R0, R5
 		LDR     R1, =ADDR_LED_31_16
         STRH    R0, [R1]
-		
+		MOVS    R7, #16
+        
 rotate  BL 		pause
         MOVS    R3, #1
         RORS    R0, R0, R3
         LDR     R1, =ADDR_LED_31_16
         STRH    R0, [R1]
-        SUBS    R5, #1
+		SUBS    R7, #1
         BNE		rotate ; do while block is at end
 
 ; END: To be programmed
