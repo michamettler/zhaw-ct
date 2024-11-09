@@ -78,8 +78,55 @@ main    PROC
 main_loop
 ; STUDENTS: To be programmed
 
+		BL adc_get_value
+		
+		LDR		R7,=ADDR_BUTTONS
+		LDR		R6,=0x01
+		LDRB	R7,[R7]
+		TST		R7, R6			; check if t0 is pressed
+		BNE		case_green		; true
+		
+		; false (blue)
+		
+
+		B		main_loop		; false
 
 
+case_green
+		; color green
+		LDR 	R7, =ADDR_LCD_COLOUR
+		LDR		R6, =0x0000
+		STRH	R6, [R7, #0]
+		STRH	R6, [R7, #2]
+		STRH	R6, [R7, #4]
+		LDR		R6, =0xffff
+		STRH	R6, [R7, #2]
+		
+		; display ADC-value
+		LDR R7, =ADDR_LED_31_0
+		STRB R0, [R7, #3]
+		
+		B		main_loop
+	
+case_blue
+		; color blue
+		LDR 	R7, =ADDR_LCD_COLOUR
+		LDR		R6, =0x0000
+		STRH	R6, [R7, #0]
+		STRH	R6, [R7, #2]
+		STRH	R6, [R7, #4]
+		LDR		R6, =0xffff
+		STRH	R6, [R7, #4]
+
+case_red
+		; color red
+		LDR 	R7, =ADDR_LCD_COLOUR
+		LDR		R6, =0x0000
+		STRH	R6, [R7, #0]
+		STRH	R6, [R7, #2]
+		STRH	R6, [R7, #4]
+		LDR		R6, =0xffff
+		STRH	R6, [R7, #0]
 
 ; END: To be programmed
         B          main_loop
