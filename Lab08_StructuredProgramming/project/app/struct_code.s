@@ -86,9 +86,17 @@ main_loop
 		TST		R7, R6			; check if t0 is pressed
 		BNE		case_green		; true
 		
-		; false (blue)
+		; false (subtraction and store result in R1)
+		LDR 	R7, =ADDR_DIP_SWITCH_7_0
+		LDRB	R7, [R7]
 		
+		CMP     R7, R0			; check if R1 >= 0
+		BGE		case_blue		; true
+		BLT		case_red		; false
 
+		; display result (R1) on 7-segment (for red & blue cases)
+		; TODO
+		
 		B		main_loop		; false
 
 
@@ -117,6 +125,8 @@ case_blue
 		STRH	R6, [R7, #4]
 		LDR		R6, =0xffff
 		STRH	R6, [R7, #4]
+		
+		BX		LR
 
 case_red
 		; color red
@@ -127,6 +137,8 @@ case_red
 		STRH	R6, [R7, #4]
 		LDR		R6, =0xffff
 		STRH	R6, [R7, #0]
+		
+		BX		LR
 
 ; END: To be programmed
         B          main_loop
