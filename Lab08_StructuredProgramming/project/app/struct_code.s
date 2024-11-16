@@ -78,6 +78,8 @@ main    PROC
 main_loop
 ; STUDENTS: To be programmed
 
+; task a)
+
 		BL adc_get_value
 		
 		LDR		R7,=ADDR_BUTTONS
@@ -90,14 +92,9 @@ main_loop
 		LDR 	R7, =ADDR_DIP_SWITCH_7_0
 		LDRB	R7, [R7]
 		
-		CMP     R7, R0			; check if R1 >= 0
+		CMP     R7, R0			; check if R7 >= R1
 		BGE		case_blue		; true
 		BLT		case_red		; false
-
-		; display result (R1) on 7-segment (for red & blue cases)
-		; TODO
-		
-		B		main_loop		; false
 
 
 case_green
@@ -110,10 +107,7 @@ case_green
 		LDR		R6, =0xffff
 		STRH	R6, [R7, #2]
 		
-		; display ADC-value
-		LDR R7, =ADDR_LED_31_0
-		STRB R0, [R7, #3]
-		
+		BL		adc_bar
 		B		main_loop
 	
 case_blue
@@ -126,7 +120,12 @@ case_blue
 		LDR		R6, =0xffff
 		STRH	R6, [R7, #4]
 		
-		BX		LR
+		LDR 	R7, =ADDR_DIP_SWITCH_7_0
+		LDRB	R7, [R7]
+		SUBS	R0, R7, R0
+		
+		BL		display_bit
+		B		display_result
 
 case_red
 		; color red
@@ -138,8 +137,95 @@ case_red
 		LDR		R6, =0xffff
 		STRH	R6, [R7, #0]
 		
-		BX		LR
+		LDR 	R7, =ADDR_DIP_SWITCH_7_0
+		LDRB	R7, [R7]
+		SUBS	R0, R7, R0
+		
+		BL display_zeros
+		B display_result
+		
+display_result
+		; display result (R1) on 7-segment (for red & blue cases)
+		LDR     R7, =ADDR_7_SEG_BIN_DS3_0
+		MOVS	R6,#0x00		
+		STRB    R6, [R7, #1]	;write 00 at the beginning
+		STRB    R0, [R7, #0]    ;write input  00xx
+		
+		B		main_loop
 
+; task b)
+
+adc_bar PROC
+		PUSH	{LR, R0}
+		LSRS	R0,R0,#3				; R0= ADC>>3
+		MOVS	R1, #1					; R1=led_count = 1
+adc_while		
+		CMP		R0,#0
+		BEQ		adc_while_end			; while R0 != 0
+		LSLS	R1,R1,#1				; 0001 << 1	= 0010
+		ADDS	R1,R1,#0x1				; 0010 | 1  = 0011 
+		SUBS	R0,R0, #1				; R0--
+		B		adc_while
+adc_while_end
+		LDR 	R2,=ADDR_LED_31_0
+		STR		R1,[R2,#0]				; display led_count
+		POP		{PC, R0}
+		ENDP
+
+; task c)
+
+display_bit
+		PUSH	{LR, R0}
+		BL		write_bit_ascii	; print "Bit "
+		CMP		R0, #4          ; Check if diff < 4
+		BLT		display_2bit    ; If r1 < 4, branch to display_2bit
+		CMP		R0, #16         ; Check if diff < 16
+		BLT		display_4bit    ; If r1 < 16, branch to display_4bit
+		B		display_8bit    ; In all other cases, branch to display_8bit
+		
+display_2bit
+        LDR		R1, =DISPLAY_2_BIT
+		B		end_display   
+
+display_4bit
+        LDR		R1, =DISPLAY_4_BIT
+		B		end_display    
+			
+display_8bit
+        LDR		R1, =DISPLAY_8_BIT
+
+end_display
+	    LDR		R1, [R1]
+		LDR		R2, =ADDR_LCD_ASCII 
+        STRB	R1, [R2,#8]
+		POP		{PC, R0}
+
+; task d)
+display_zeros PROC
+		PUSH	{R0,LR}
+		MVNS	R4, R0          ; Invert diff and store it in r4
+		MOVS	R3, #0          ; Initialize count to 0, store in r3
+loop_disp
+		CMP		R4, #0          ; Check if diff is 0
+		BEQ		end_loop        ; Exit loop if diff is 0
+
+		MOVS	R0, #1
+		TST		R4, R0          ; Test if the least significant bit of diff is 1
+		BEQ		shift_right     ; If not, skip incrementing count
+
+		ADDS	R3, R3, #1      ; Increment count if the least significant bit is 1
+
+shift_right
+		LSRS	R4, R4, #1      ; Logical shift right by 1 to check the next bit
+		B		loop_disp       ; Repeat the loop
+
+end_loop
+		LDR		R0,=0x60000337
+		STRB	R3,[R0,#0]
+		POP		{R0,PC}
+		endp
+
+		
 ; END: To be programmed
         B          main_loop
         
