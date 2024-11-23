@@ -14,7 +14,7 @@
  */
 #include <stdint.h>
 #include "toggle.h"
-#include "write.h"
+#include "../inc/write.h"
 
 #define LED 0x60000100
 

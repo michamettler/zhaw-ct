@@ -33,7 +33,8 @@
 // add missing includes
 /// STUDENTS: To be programmed
 
-
+#include "toggle.h"
+#include "../inc/read.h"
 
 
 /// END: To be programmed
