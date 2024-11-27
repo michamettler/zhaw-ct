@@ -7,10 +7,9 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>Target_1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6220000::V6.22::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -48,14 +47,14 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>.\build\</OutputDirectory>
-          <OutputName>searchmax</OutputName>
+          <OutputDirectory>.\</OutputDirectory>
+          <OutputName>input-output</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\build\</ListingPath>
+          <ListingPath>.\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -126,6 +125,47 @@
             <HexOffset>0</HexOffset>
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
+          <Simulator>
+            <UseSimulator>0</UseSimulator>
+            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
+            <RunToMain>1</RunToMain>
+            <RestoreBreakpoints>1</RestoreBreakpoints>
+            <RestoreWatchpoints>1</RestoreWatchpoints>
+            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
+            <RestoreFunctions>1</RestoreFunctions>
+            <RestoreToolbox>1</RestoreToolbox>
+            <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
+          </Simulator>
+          <Target>
+            <UseTarget>1</UseTarget>
+            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
+            <RunToMain>1</RunToMain>
+            <RestoreBreakpoints>1</RestoreBreakpoints>
+            <RestoreWatchpoints>1</RestoreWatchpoints>
+            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
+            <RestoreFunctions>0</RestoreFunctions>
+            <RestoreToolbox>1</RestoreToolbox>
+            <RestoreTracepoints>1</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
+          </Target>
+          <RunDebugAfterBuild>0</RunDebugAfterBuild>
+          <TargetSelection>0</TargetSelection>
+          <SimDlls>
+            <CpuDll></CpuDll>
+            <CpuDllArguments></CpuDllArguments>
+            <PeripheralDll></PeripheralDll>
+            <PeripheralDllArguments></PeripheralDllArguments>
+            <InitializationFile></InitializationFile>
+          </SimDlls>
+          <TargetDlls>
+            <CpuDll></CpuDll>
+            <CpuDllArguments></CpuDllArguments>
+            <PeripheralDll></PeripheralDll>
+            <PeripheralDllArguments></PeripheralDllArguments>
+            <InitializationFile></InitializationFile>
+            <Driver>BIN\UL2CM3.DLL</Driver>
+          </TargetDlls>
         </DebugOption>
         <Utilities>
           <Flash1>
@@ -133,7 +173,7 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>1</Capability>
+            <Capability>0</Capability>
             <DriverSelection>-1</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
@@ -212,7 +252,7 @@
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
             <Im1Chk>1</Im1Chk>
-            <Im2Chk>0</Im2Chk>
+            <Im2Chk>1</Im2Chk>
             <OnChipMemories>
               <Ocm1>
                 <Type>0</Type>
@@ -260,17 +300,17 @@
                 <Size>0x0</Size>
               </XRAM>
               <OCR_RVCT1>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT2>
               <OCR_RVCT3>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT3>
@@ -280,7 +320,7 @@
                 <Size>0x200000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
                 <Size>0x0</Size>
               </OCR_RVCT5>
@@ -331,8 +371,8 @@
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
-            <vShortEn>0</vShortEn>
-            <vShortWch>0</vShortWch>
+            <vShortEn>1</vShortEn>
+            <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
@@ -382,122 +422,10 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>app</GroupName>
-          <Files>
-            <File>
-              <FileName>main.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\app\main.s</FilePath>
-            </File>
-            <File>
-              <FileName>search_max.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\app\search_max.s</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>::Device</GroupName>
-        </Group>
-        <Group>
-          <GroupName>::HAL</GroupName>
+          <GroupName>Source Group 1</GroupName>
         </Group>
       </Groups>
     </Target>
   </Targets>
-
-  <RTE>
-    <apis/>
-    <components>
-      <component Cclass="Device" Cgroup="Startup" Cvendor="InES" Cversion="4.0.4" condition="SYSTEM_M0">
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="HAL" Cgroup="FMC" Cvendor="InES" Cversion="4.0.4" condition="HAL">
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="HAL" Cgroup="GPIO" Cvendor="InES" Cversion="4.0.4" condition="HAL">
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="HAL" Cgroup="PWR" Cvendor="InES" Cversion="4.0.4" condition="HAL">
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </component>
-      <component Cclass="HAL" Cgroup="RCC" Cvendor="InES" Cversion="4.0.4" condition="HAL">
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </component>
-    </components>
-    <files>
-      <file attr="config" category="source" name="Device\Source\datainit_ctboard.s" version="4.0.4">
-        <instance index="0">RTE\Device\CT_Board_HS14_M0\datainit_ctboard.s</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="InES" Cversion="4.0.4" condition="SYSTEM_M0"/>
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="source" name="Device\Source\startup_ctboard.s" version="4.0.4">
-        <instance index="0">RTE\Device\CT_Board_HS14_M0\startup_ctboard.s</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="InES" Cversion="4.0.4" condition="SYSTEM_M0"/>
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="source" name="Device\Source\system_ctboard.c" version="4.0.4">
-        <instance index="0">RTE\Device\CT_Board_HS14_M0\system_ctboard.c</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="InES" Cversion="4.0.4" condition="SYSTEM_M0"/>
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="source" name="HAL\Source\hal_fmc.c" version="4.0.4">
-        <instance index="0">RTE\HAL\CT_Board_HS14_M0\hal_fmc.c</instance>
-        <component Cclass="HAL" Cgroup="FMC" Cvendor="InES" Cversion="4.0.4" condition="HAL"/>
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="source" name="HAL\Source\hal_gpio.c" version="4.0.4">
-        <instance index="0">RTE\HAL\CT_Board_HS14_M0\hal_gpio.c</instance>
-        <component Cclass="HAL" Cgroup="GPIO" Cvendor="InES" Cversion="4.0.4" condition="HAL"/>
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="source" name="HAL\Source\hal_pwr.c" version="4.0.4">
-        <instance index="0">RTE\HAL\CT_Board_HS14_M0\hal_pwr.c</instance>
-        <component Cclass="HAL" Cgroup="PWR" Cvendor="InES" Cversion="4.0.4" condition="HAL"/>
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="source" name="HAL\Source\hal_rcc.c" version="4.0.4">
-        <instance index="0">RTE\HAL\CT_Board_HS14_M0\hal_rcc.c</instance>
-        <component Cclass="HAL" Cgroup="RCC" Cvendor="InES" Cversion="4.0.4" condition="HAL"/>
-        <package name="CTBoard14_DFP" schemaVersion="1.1" url="https://ennis.zhaw.ch/pack/" vendor="InES" version="4.0.4"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-    </files>
-  </RTE>
 
 </Project>
