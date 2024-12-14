@@ -46,6 +46,10 @@ main            PROC
                 ; Configure NVIC (enable interrupt channel)
                 ; STUDENTS: To be programmed
 
+				LDR R0, =REG_SETENA0
+				
+				LDR R1, =0x10000040 ;IRQ24, IRQ6
+				STR R1, [R0]
 
                 ; END: To be programmed 
 
@@ -59,6 +63,10 @@ loop
                 ; Output counter on 7-seg
                 ; STUDENTS: To be programmed
 
+				LDR R1,	=REG_CT_7SEG
+				LDR R2,	=bffr
+				LDR R2,	[R2]
+				STR R2,	[R1]
 
                 ; END: To be programmed
 
@@ -71,6 +79,18 @@ loop
 ; -----------------------------------------------------------------------------
                  ; STUDENTS: To be programmed
 
+EXTI0_IRQHandler PROC
+				 EXPORT	EXTI0_IRQHandler
+			     PUSH	{LR}
+				 
+				 LDR	R5,=cntr
+				 LDR	R6,[R5]
+				 ADDS	R6,#1
+				 STR	R6, [R5]
+				 
+				 BL		clear_IRQ_EXTI0
+				 POP	{PC}
+			     ENDP
 
                  ; END: To be programmed
 
@@ -80,6 +100,25 @@ loop
 ; -----------------------------------------------------------------------------
                 ; STUDENTS: To be programmed
 
+TIM2_IRQHandler PROC
+				EXPORT	TIM2_IRQHandler
+				PUSH	{LR}
+				
+				LDR		R5,=LED_16_31
+				LDR		R6,[R5]
+				MVNS	R6,R6 ; invert
+				STR		R6,[R5]
+				
+				LDR		R5,=cntr
+				LDR		R6,[R5]
+				LDR		R7,=bffr
+				
+				STR		R6,[R7]
+				MOVS	R6,#0x0
+				STR		R6,[R5]
+				
+				BL		clear_IRQ_TIM2
+				POP		{PC}
 
                 ; END: To be programmed
                 ALIGN
@@ -92,6 +131,8 @@ loop
 
                 ; STUDENTS: To be programmed
 
+cntr       		DCD		0
+bffr        	DCD		0
 
                 ; END: To be programmed
 
