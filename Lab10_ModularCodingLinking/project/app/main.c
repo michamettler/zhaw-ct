@@ -34,8 +34,8 @@
 /// STUDENTS: To be programmed
 
 #include "toggle.h"
-#include "../inc/read.h"
-
+#include "read.h"
+#include "write.h"
 
 /// END: To be programmed
 

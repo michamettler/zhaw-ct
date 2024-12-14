@@ -21,28 +21,24 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
-C:\Workarea\Projects\zhaw\zhaw-ct1\Lab09_ModularCodingLinking\project\linker_lab.uvprojx
-Project File Date:  11/23/2024
+C:\Workarea\Projects\zhaw\zhaw-ct1\Lab10_ModularCodingLinking\project\linker_lab.uvprojx
+Project File Date:  12/07/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'C:\Users\mettl\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
-assembling datainit_ctboard.s...
 assembling startup_ctboard.s...
-compiling hal_gpio.c...
-compiling main.c...
-compiling toggle.c...
+assembling datainit_ctboard.s...
 compiling system_ctboard.c...
+compiling hal_gpio.c...
+compiling toggle.c...
+compiling main.c...
 compiling hal_fmc.c...
 compiling hal_pwr.c...
 compiling hal_rcc.c...
 linking...
-.\Objects\linker_lab.axf: Error: L6218E: Undefined symbol read8 (referred from main.o).
-.\Objects\linker_lab.axf: Error: L6218E: Undefined symbol write8 (referred from toggle.o).
-Not enough information to list image symbols.
-Not enough information to list load addresses in the image map.
-Finished: 2 information, 0 warning and 2 error messages.
-".\Objects\linker_lab.axf" - 2 Error(s), 0 Warning(s).
+Program Size: Code=4748 RO-data=980 RW-data=4 ZI-data=8200  
+".\Objects\linker_lab.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -65,13 +61,13 @@ Package Vendor: InES
 <h2>Collection of Component Files used:</h2>
 
    * Component: InES::Device:Startup@4.0.4
-      Include file:  Device/Include/m0/platform_ctboard.h
-      Include file:  Device/Include/reg_stm32f4xx.h
       Source file:   Device/Source/datainit_ctboard.s
       Source file:   Device/Source/system_ctboard.c
-      Include file:  Device/Include/reg_ctboard.h
-      Include file:  Device/Include/system_ctboard.h
       Source file:   Device/Source/startup_ctboard.s
+      Include file:  Device/Include/system_ctboard.h
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Include file:  Device/Include/reg_ctboard.h
+      Include file:  Device/Include/m0/platform_ctboard.h
 
    * Component: InES::HAL:FMC@4.0.4
       Include file:  Device/Include/reg_stm32f4xx.h
@@ -80,10 +76,10 @@ Package Vendor: InES
       Include file:  HAL/Include/hal_fmc.h
 
    * Component: InES::HAL:GPIO@4.0.4
-      Include file:  HAL/Include/hal_common.h
-      Include file:  HAL/Include/hal_gpio.h
-      Source file:   HAL/Source/hal_gpio.c
       Include file:  Device/Include/reg_stm32f4xx.h
+      Include file:  HAL/Include/hal_common.h
+      Source file:   HAL/Source/hal_gpio.c
+      Include file:  HAL/Include/hal_gpio.h
 
    * Component: InES::HAL:PWR@4.0.4
       Include file:  HAL/Include/hal_common.h
@@ -92,11 +88,10 @@ Package Vendor: InES
       Include file:  Device/Include/reg_stm32f4xx.h
 
    * Component: InES::HAL:RCC@4.0.4
+      Include file:  HAL/Include/hal_rcc.h
+      Include file:  HAL/Include/hal_common.h
       Source file:   HAL/Source/hal_rcc.c
       Include file:  Device/Include/reg_stm32f4xx.h
-      Include file:  HAL/Include/hal_common.h
-      Include file:  HAL/Include/hal_rcc.h
-Target not created.
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

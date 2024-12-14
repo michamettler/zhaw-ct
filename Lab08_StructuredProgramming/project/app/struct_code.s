@@ -169,7 +169,7 @@ adc_while
 adc_while_end
 		LDR 	R2,=ADDR_LED_31_0
 		STR		R1,[R2,#0]				; display led_count
-		POP		{PC, R0}
+			
 		ENDP
 
 ; task c)
