@@ -25,7 +25,13 @@ static uint8_t dice_counter = 1;
 
 /// STUDENTS: To be programmed
 
+void dice_counter_increment(void) {
+    dice_counter++;
+}
 
+uint8_t dice_counter_read(void) {
+  return (dice_counter % NR_OF_DICE_VALUES) + 1;
+}
 
 
 /// END: To be programmed
