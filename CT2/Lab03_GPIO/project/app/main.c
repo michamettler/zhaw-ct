@@ -25,6 +25,9 @@
 /* Re-definition guard */
 #define MASK_3_BITS  0x0007
 
+#define MASK_2_BITS  0x0003
+#define MASK_6_BITS  0x003F //mask for first 6 bits
+
 static void init_GPIOA(void);
 static void init_GPIOB(void);
 static void config_check_GPIOA(void);
@@ -57,11 +60,21 @@ int main(void)
     while (1) {
         /* implement tasks 6.1 to 6.2 below */
         /// STUDENTS: To be programmed
+				
+				data_dip_switch = MASK_3_BITS & CT_DIPSW->BYTE.S15_8;
+				CT_LED->BYTE.LED15_8 = data_dip_switch;
+				
+				GPIOB->ODR = data_dip_switch;
+				
+				data_gpio_in = GPIOB->ODR;
+				CT_LED->BYTE.LED7_0 = (MASK_3_BITS & GPIOB->ODR);
+				
+				
+				//6.1
+				CT_LED->BYTE.LED23_16 = (MASK_3_BITS & GPIOA->IDR);
 
 
-
-
-        /// END: To be programmed
+				/// END: To be programmed
     }
 }
 
@@ -79,8 +92,20 @@ static void init_GPIOA(void)
 		/* 6.1 define inputs */
     /// STUDENTS: To be programmed
 
-
-
+		// clear moder
+		GPIOA->MODER &= ~(MASK_2_BITS << 0); //PA0
+		GPIOA->MODER &= ~(MASK_2_BITS << 2); //PA1
+		GPIOA->MODER &= ~(MASK_2_BITS << 4); //PA2
+		
+		// clear pupdr
+		GPIOA->PUPDR &= ~(MASK_2_BITS << 0); //PA0
+		GPIOA->PUPDR &= ~(MASK_2_BITS << 2); //PA1
+		GPIOA->PUPDR &= ~(MASK_2_BITS << 4); //PA2
+		
+		// set pupdr
+		GPIOA->PUPDR = (0x02 << 0); //PA0
+		GPIOA->PUPDR = (0x01 << 2); //PA1
+		GPIOA->PUPDR = (0x00 << 4); //PA2
 
     /// END: To be programmed
 		
@@ -100,7 +125,17 @@ static void init_GPIOB(void)
 		/* 6.2 define outputs */
     /// STUDENTS: To be programmed
 
+		GPIOB->MODER &= ~(MASK_6_BITS << 0); 
+		GPIOB->OTYPER &= ~(MASK_3_BITS << 0);
+		GPIOB->PUPDR &= ~(MASK_6_BITS << 0); 
+		GPIOB->OSPEEDR &= ~(MASK_6_BITS << 0);
 
+		// set
+		//GPIOB->MODER = (0x15 << 0); 
+		GPIOB->MODER = 0x15;
+		GPIOB->OTYPER = (0x06 << 0);
+		GPIOB->PUPDR = (0x10 << 0);  
+		GPIOB->OSPEEDR = (0x24 << 0);
 
 
     /// END: To be programmed
