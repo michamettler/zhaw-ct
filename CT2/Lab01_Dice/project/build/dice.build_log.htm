@@ -22,13 +22,13 @@ Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Workarea\Projects\zhaw\zhaw-ct\CT2\Lab01_Dice\project\dice.uvprojx
-Project File Date:  02/22/2025
+Project File Date:  03/01/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'C:\Users\mettl\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
-compiling dice_counter.c...
-assembling startup_ctboard.s...
+compiling main.c...
+compiling statistics.c...
 app/lcd.c(39): warning: passing 'volatile uint8_t *' (aka 'volatile unsigned char *') to parameter of type 'char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
    39 |   snprintf(&CT_LCD->ASCII[index], 3, "%2d", value);
       |            ^~~~~~~~~~~~~~~~~~~~~
@@ -61,15 +61,15 @@ app/lcd.c(53): warning: 'snprintf' will always be truncated; specified size is 2
       |   ^
 6 warnings generated.
 compiling lcd.c...
-compiling statistics.c...
-compiling main.c...
+compiling dice_counter.c...
 compiling system_ctboard.c...
 assembling datainit_ctboard.s...
+assembling startup_ctboard.s...
 compiling hal_ct_seg7.c...
 compiling hal_fmc.c...
 compiling hal_pwr.c...
-compiling hal_rcc.c...
 compiling hal_gpio.c...
+compiling hal_rcc.c...
 linking...
 Program Size: Code=14416 RO-data=1748 RW-data=4 ZI-data=8228  
 ".\build\dice.axf" - 0 Error(s), 6 Warning(s).
@@ -96,43 +96,43 @@ Package Vendor: InES
 <h2>Collection of Component Files used:</h2>
 
    * Component: InES::Device:Startup@4.0.4
+      Include file:  Device/Include/reg_stm32f4xx.h
       Include file:  Device/Include/reg_ctboard.h
+      Include file:  Device/Include/system_ctboard.h
+      Include file:  Device/Include/m0/platform_ctboard.h
+      Source file:   Device/Source/startup_ctboard.s
       Source file:   Device/Source/datainit_ctboard.s
       Source file:   Device/Source/system_ctboard.c
-      Source file:   Device/Source/startup_ctboard.s
-      Include file:  Device/Include/reg_stm32f4xx.h
-      Include file:  Device/Include/m0/platform_ctboard.h
-      Include file:  Device/Include/system_ctboard.h
 
    * Component: InES::HAL:CT Board:7 segment@4.0.4
       Include file:  Device/Include/reg_ctboard.h
-      Source file:   HAL/Source/hal_ct_seg7.c
       Include file:  HAL/Include/hal_ct_seg7.h
+      Source file:   HAL/Source/hal_ct_seg7.c
 
    * Component: InES::HAL:FMC@4.0.4
       Include file:  Device/Include/reg_stm32f4xx.h
-      Include file:  HAL/Include/hal_common.h
       Include file:  HAL/Include/hal_fmc.h
       Source file:   HAL/Source/hal_fmc.c
+      Include file:  HAL/Include/hal_common.h
 
    * Component: InES::HAL:GPIO@4.0.4
+      Source file:   HAL/Source/hal_gpio.c
       Include file:  Device/Include/reg_stm32f4xx.h
       Include file:  HAL/Include/hal_common.h
-      Source file:   HAL/Source/hal_gpio.c
       Include file:  HAL/Include/hal_gpio.h
 
    * Component: InES::HAL:PWR@4.0.4
+      Include file:  Device/Include/reg_stm32f4xx.h
       Include file:  HAL/Include/hal_pwr.h
       Source file:   HAL/Source/hal_pwr.c
-      Include file:  Device/Include/reg_stm32f4xx.h
       Include file:  HAL/Include/hal_common.h
 
    * Component: InES::HAL:RCC@4.0.4
-      Source file:   HAL/Source/hal_rcc.c
       Include file:  Device/Include/reg_stm32f4xx.h
-      Include file:  HAL/Include/hal_common.h
       Include file:  HAL/Include/hal_rcc.h
-Build Time Elapsed:  00:00:00
+      Source file:   HAL/Source/hal_rcc.c
+      Include file:  HAL/Include/hal_common.h
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
