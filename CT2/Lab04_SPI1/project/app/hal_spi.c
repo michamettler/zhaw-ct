@@ -59,8 +59,16 @@ void hal_spi_init(void)
     
     /// STUDENTS: To be programmed
 
-
-
+		/*SPI1->CR1 |= 0x4;   // set master flag*/
+		/*SPI1->CR1 |= 0x38;   // set baud rate to 111 => 256*/
+		/*SPI1->CR1 &= 0xFBFF; // set RXONLY to 0*/
+		/*SPI1->CR1 &= 0xBFFF; // set BIDIOE to 0*/
+		/*SPI1->CR1 &= 0xCFFF; // set CRCN + CRCEN to 0*/
+		/*SPI1->CR1 |= 0x0300; // set ssm + ssi to 1*/
+		//
+		/*SPI1->CR1 |= 0x0040; // set spe to 1 and make it scharf*/
+		SPI1->CR1 = 0x33C;
+		SPI1->CR1 |= 1 << 6; // SPE
 
     /// END: To be programmed
     
@@ -74,8 +82,24 @@ uint8_t hal_spi_read_write(uint8_t send_byte)
 {
     /// STUDENTS: To be programmed
 
+		uint8_t receive_byte = 0x0;
 
+		set_ss_pin_low();
+		SPI1->DR = send_byte;
 
+		while ((SPI1->SR & BIT_TXE) == 0)
+			; // wait for txe flag
+		while ((SPI1->SR & BIT_RXNE) == 0)
+			; // wait for rxne flag
+		receive_byte = SPI1->DR;
+
+		while (((SPI1->SR & BIT_TXE) == 0) && ((SPI1->SR & BIT_BSY) != 0))
+			; // wait for bsy flag
+
+		wait_10_us();
+		set_ss_pin_high();
+
+		return receive_byte;
 
     /// END: To be programmed
 }
