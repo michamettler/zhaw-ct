@@ -1035,12 +1035,12 @@ Image component sizes
        610          4          0          0          0       8774   hal_gpio.o
         14          0          0          0          0       2074   hal_pwr.o
       1572        404        368          0          0       5237   hal_rcc.o
-       568        132         97          0          0       4078   main.o
+       568        132         97          0          0       4073   main.o
         36          8        428          0       8192        812   startup_ctboard.o
        798         64          0          0          0       7079   system_ctboard.o
 
     ----------------------------------------------------------------------
-      4352        680       1064          0       8192      31960   Object Totals
+      4352        680       1064          0       8192      31955   Object Totals
          0          0         16          0          0          0   (incl. Generated)
          2          0          3          0          0          0   (incl. Padding)
 
@@ -1092,8 +1092,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      5256        776       1064          0       8192      32232   Grand Totals
-      5256        776       1064          0       8192      32232   ELF Image Totals
+      5256        776       1064          0       8192      32227   Grand Totals
+      5256        776       1064          0       8192      32227   ELF Image Totals
       5256        776       1064          0          0          0   ROM Totals
 
 ==============================================================================
