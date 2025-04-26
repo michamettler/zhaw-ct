@@ -21,24 +21,25 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
-C:\Workarea\Projects\zhaw\zhaw-ct\CT2\Lab03_GPIO\project\code.uvprojx
-Project File Date:  03/15/2025
+C:\Workarea\Projects\zhaw\zhaw-ct\CT2\Lab08_Memory\code_rom\Lab.uvprojx
+Project File Date:  04/12/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'C:\Users\mettl\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
-compiling hal_pwr.c...
-compiling main.c...
+compiling hal_ct_buttons.c...
 compiling system_ctboard.c...
+compiling hal_ct_seg7.c...
+compiling main.c...
+assembling startup_ctboard.s...
+assembling datainit_ctboard.s...
 compiling hal_fmc.c...
 compiling hal_gpio.c...
-assembling datainit_ctboard.s...
-assembling startup_ctboard.s...
+compiling hal_pwr.c...
 compiling hal_rcc.c...
-compiling hal_timer.c...
 linking...
-Program Size: Code=5256 RO-data=1064 RW-data=0 ZI-data=8192  
-".\build\lab.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=7804 RO-data=964 RW-data=0 ZI-data=8192  
+".\build\Lab.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -47,11 +48,11 @@ Package Vendor: InES
                 InES::CTBoard14_DFP@4.0.4
                 CT Board 14 (STM32F429ZI) Device Support
    * Component: Startup Version: 4.0.4
+   * Component: 7 segment Version: 4.0.4
    * Component: FMC Version: 4.0.4
    * Component: GPIO Version: 4.0.4
    * Component: PWR Version: 4.0.4
    * Component: RCC Version: 4.0.4
-   * Component: TIMER Version: 4.0.4
 
 <h2>Collection of Component include folders:</h2>
   ./RTE/_Target_1
@@ -62,44 +63,43 @@ Package Vendor: InES
 <h2>Collection of Component Files used:</h2>
 
    * Component: InES::Device:Startup@4.0.4
-      Include file:  Device/Include/m0/platform_ctboard.h
-      Include file:  Device/Include/reg_ctboard.h
       Source file:   Device/Source/startup_ctboard.s
-      Include file:  Device/Include/system_ctboard.h
-      Source file:   Device/Source/datainit_ctboard.s
-      Source file:   Device/Source/system_ctboard.c
       Include file:  Device/Include/reg_stm32f4xx.h
+      Source file:   Device/Source/system_ctboard.c
+      Include file:  Device/Include/m0/platform_ctboard.h
+      Source file:   Device/Source/datainit_ctboard.s
+      Include file:  Device/Include/reg_ctboard.h
+      Include file:  Device/Include/system_ctboard.h
+
+   * Component: InES::HAL:CT Board:7 segment@4.0.4
+      Include file:  Device/Include/reg_ctboard.h
+      Include file:  HAL/Include/hal_ct_seg7.h
+      Source file:   HAL/Source/hal_ct_seg7.c
 
    * Component: InES::HAL:FMC@4.0.4
-      Source file:   HAL/Source/hal_fmc.c
-      Include file:  HAL/Include/hal_fmc.h
-      Include file:  HAL/Include/hal_common.h
       Include file:  Device/Include/reg_stm32f4xx.h
+      Include file:  HAL/Include/hal_common.h
+      Include file:  HAL/Include/hal_fmc.h
+      Source file:   HAL/Source/hal_fmc.c
 
    * Component: InES::HAL:GPIO@4.0.4
       Include file:  HAL/Include/hal_common.h
-      Source file:   HAL/Source/hal_gpio.c
       Include file:  Device/Include/reg_stm32f4xx.h
       Include file:  HAL/Include/hal_gpio.h
+      Source file:   HAL/Source/hal_gpio.c
 
    * Component: InES::HAL:PWR@4.0.4
-      Source file:   HAL/Source/hal_pwr.c
-      Include file:  HAL/Include/hal_pwr.h
-      Include file:  Device/Include/reg_stm32f4xx.h
       Include file:  HAL/Include/hal_common.h
+      Include file:  HAL/Include/hal_pwr.h
+      Source file:   HAL/Source/hal_pwr.c
+      Include file:  Device/Include/reg_stm32f4xx.h
 
    * Component: InES::HAL:RCC@4.0.4
       Include file:  HAL/Include/hal_rcc.h
+      Include file:  Device/Include/reg_stm32f4xx.h
+      Include file:  HAL/Include/hal_common.h
       Source file:   HAL/Source/hal_rcc.c
-      Include file:  Device/Include/reg_stm32f4xx.h
-      Include file:  HAL/Include/hal_common.h
-
-   * Component: InES::HAL:TIMER@4.0.4
-      Include file:  HAL/Include/hal_common.h
-      Source file:   HAL/Source/hal_timer.c
-      Include file:  HAL/Include/hal_timer.h
-      Include file:  Device/Include/reg_stm32f4xx.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
